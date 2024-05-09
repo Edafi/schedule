@@ -10,6 +10,7 @@ class Group_Schedule extends Model
     use HasFactory;
     protected $conection = 'mariadb';
     protected $table = 'group_schedule';
+    public $timestamps = false;
     protected $fillable =[
         'id_group',
         'id_schedule',

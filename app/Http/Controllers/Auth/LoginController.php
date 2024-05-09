@@ -18,7 +18,10 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect('/dashboard');
+            if(Auth::user()->type == 'Department')
+                return redirect('/dashboard-department');
+            else
+                return redirect('/dashboard-schedule');
         }
 
         return back()->withErrors([

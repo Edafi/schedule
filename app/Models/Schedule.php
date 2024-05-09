@@ -11,6 +11,7 @@ class Schedule extends Model
     protected $conection = 'mariadb';
     protected $table = 'schedule';
     protected $primary_key = 'id';
+    public $timestamps = false;
     protected $fillable =[
         'id_class',
         'id_audience',
