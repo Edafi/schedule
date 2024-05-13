@@ -46,7 +46,7 @@
                 <label for="audience"> <h4>Аудитория </h4></label>
                 <select id="audience" name="audience" class="form-select" aria-label="Default select example">
                     @foreach($audiences as $audience)
-                        <option value="{{$audience->id}}" required>{{$audience->name . "   Мест - " . $audience->size}}</option>
+                        <option value="{{$audience->id}}" required>{{$audience->name . " тип - ". $audience->type ."   Мест - " . $audience->size}}</option>
                     @endforeach
                 </select>
             </div>
@@ -99,7 +99,7 @@
             </div>
 
             <div>
-            <button type="submit">Потвердить</button>
+            <button type="submit">Подтвердить</button>
             </div>
 
         </form>

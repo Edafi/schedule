@@ -20,8 +20,10 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             if(Auth::user()->type == 'Department')
                 return redirect('/dashboard-department');
-            else
+            elseif(Auth::user()->type == 'ScheduleMan')
                 return redirect('/dashboard-schedule');
+            elseif(Auth::user()->type == 'Teacher')
+                return redirect('/dashboard-teacher');
         }
 
         return back()->withErrors([

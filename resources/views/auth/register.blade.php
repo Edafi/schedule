@@ -19,6 +19,7 @@
             <select id="type" name="type" class="form-select" aria-label="Default select example">
                 <option value="Department" required>Работник факультета/института</option>
                 <option value="ScheduleMan" required>Составитель расписания</option>
+                <option value="Teacher" required>Преподаватель</option>
             </select>
         </div>
     </div>

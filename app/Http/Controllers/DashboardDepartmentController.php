@@ -21,20 +21,22 @@ use Illuminate\Support\Facades\Hash;
 class DashboardDepartmentController extends Controller
 {
     public static function render(){
-        $departments = DB::table('departments') -> orderBy('name') -> get();
-        $audiences = DB::table('audiences') -> orderBy('name')->get();
-        $department = DB::table('departments') -> where('name', Auth::user() -> department_name) -> first();
-        $classes = DB::table('classes') -> orderBy('name') -> get();
-        $teachers = DB::table('teachers') -> orderBy('fullname') -> get();
-        $faculty_department = DB::table('faculty_department')->get();
-        $faculties = DB::table('faculties') -> orderBy('name') -> get();
-        $specializations = DB::table('specializations')  -> orderBy('name') -> get();
-        $groups = DB::table('groups')-> orderBy('name') -> get();
+        if(Auth::check()){
+            $departments = DB::table('departments') -> orderBy('name') -> get();
+            $audiences = DB::table('audiences') -> orderBy('name')->get();
+            $department = DB::table('departments') -> where('name', Auth::user() -> department_name) -> first();
+            $classes = DB::table('classes') -> orderBy('name') -> get();
+            $teachers = DB::table('teachers') -> orderBy('fullname') -> get();
+            $faculty_department = DB::table('faculty_department')->get();
+            $faculties = DB::table('faculties') -> orderBy('name') -> get();
+            $specializations = DB::table('specializations')  -> orderBy('name') -> get();
+            $groups = DB::table('groups')-> orderBy('name') -> get();
 
-        dump($departments);
-
-        return view('/dashboard-department', ['audiences' => $audiences, 'department' => $department, 'classes' => $classes, 'teachers' => $teachers, 'faculty_department' => $faculty_department,
-        'faculties' => $faculties, 'specializations' => $specializations, 'groups' => $groups]);
+            return view('/dashboard-department', ['audiences' => $audiences, 'department' => $department, 'classes' => $classes, 'teachers' => $teachers, 'faculty_department' => $faculty_department,
+            'faculties' => $faculties, 'specializations' => $specializations, 'groups' => $groups]);
+        }
+        else
+            return redirect('/login-error');
     }
 
     public static function insert_data(Request $request){

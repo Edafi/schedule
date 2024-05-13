@@ -14,7 +14,6 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $departments = DB::table('departments') -> get();
-        dump($departments);
         return view('/auth.register', ['departments' => $departments]);
     }
 
