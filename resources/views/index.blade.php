@@ -32,12 +32,12 @@
                                         @if($group -> id_specialization == $specialization -> id)
                                             <div class="accordion" id="accordionExample">
                                                 <div class="accordion-item">
-                                                    <h2 class="accordion-header" id="heading{{$group->name}}">
-                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$group->name}}" aria-expanded="true" aria-controls="collapse{{$group->name}}">
+                                                    <h2 class="accordion-header" id="heading{{$group->id}}">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$group->id}}" aria-expanded="true" aria-controls="collapse{{$group->id}}">
                                                             {{$group->name}}
                                                         </button>
                                                     </h2>
-                                                    <div id="collapse{{$group->name}}" class="accordion-collapse collapse" aria-labelledby="heading{{$group->name}}" data-bs-parent="#accordionExample">
+                                                    <div id="collapse{{$group->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$group->id}}" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
                                                             @foreach($days as $day)
                                                                 <div class="accordion" id="accordionExample">

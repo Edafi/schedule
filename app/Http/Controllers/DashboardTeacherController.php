@@ -32,7 +32,7 @@ class DashboardTeacherController extends Controller
         $teacher_id = $request->input("download");
 
         $teacher = DB::table('teachers') -> where('id', $teacher_id) -> first();
-        $schedule = DB::table('schedule') -> orderBy('day') -> get();
+        $schedule = DB::table('schedule') -> get();
         $classes = DB::table('classes') -> orderBy('name') -> get();
         $teachers = DB::table('teachers') -> orderBy('fullname') -> get();
         $audiences = DB::table('audiences') -> orderBy('name') -> get();
@@ -50,19 +50,22 @@ class DashboardTeacherController extends Controller
         $activeWorksheet->setCellValue('E4', 'Аудитория');
 
         $count = 1;
-        foreach($schedule as $sched){
-            if($sched -> id_teacher == $teacher_id){
-                foreach($classes as $class){
-                    if($class -> id == $sched -> id_class){
-                        $activeWorksheet -> setCellValue('B'.$count + 4, $sched -> day);
-                        $activeWorksheet -> setCellValue('C'.$count + 4 , $sched -> time);
-                        $activeWorksheet -> setCellValue('D'.$count + 4 , $class -> name);
+        foreach($days as $day){
+            foreach($schedule as $sched){
+                if($sched -> id_teacher == $teacher_id){
+                    foreach($classes as $class){
+                        if($class -> id == $sched -> id_class and $sched -> day == $day){
+                            $activeWorksheet -> setCellValue('B'.$count + 4, $sched -> day);
+                            $activeWorksheet -> setCellValue('C'.$count + 4 , $sched -> time);
+                            $activeWorksheet -> setCellValue('D'.$count + 4 , $class -> name);
+                        }
                     }
+                    foreach($audiences as $audience)
+                        if($audience -> id == $sched -> id_audience and $sched -> day == $day){
+                            $activeWorksheet -> setCellValue('E'.$count + 4 , $audience -> name);
+                            $count++;
+                        }    
                 }
-                foreach($audiences as $audience)
-                    if($audience -> id == $sched -> id_audience)
-                        $activeWorksheet -> setCellValue('E'.$count + 4 , $audience -> name);
-                $count++;    
             }
         }
 
